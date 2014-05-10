@@ -8,6 +8,17 @@ import com.facebook.model.GraphUser;
 // A real-world application will likely require a more robust data model.
 public class FingerBangerApplication extends Application {
 	private List<GraphUser> selectedUsers;
+	private GraphUser user;
+	
+	public GraphUser getUser()
+	{
+		return user;
+	}
+	
+	public void setUser(GraphUser aUser)
+	{
+		user = aUser;
+	}
 
 	public List<GraphUser> getSelectedUsers() {
 		return selectedUsers;

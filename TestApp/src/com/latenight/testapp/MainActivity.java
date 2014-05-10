@@ -32,7 +32,8 @@ public class MainActivity extends Activity {
 	private Button pickFriendsButton, warStoriesButton, currentWarsButton;
 	private TextView resultsTextView;
 	private UiLifecycleHelper lifecycleHelper;
-	boolean pickFriendsWhenSessionOpened, warStoriesWhenSessionOpened, currWarsWhenSessionOpened;
+	private GraphUser user;
+	private boolean pickFriendsWhenSessionOpened, warStoriesWhenSessionOpened, currWarsWhenSessionOpened;
 
 	private boolean ensureOpenSession() {
 		if (Session.getActiveSession() == null
@@ -80,8 +81,9 @@ public class MainActivity extends Activity {
 					@Override
 					public void call(Session session, SessionState state,
 							Exception exception) {
+						Log.d("Session", "Entered Status Callback Call with: " + session.isOpened());
 						if (session.isOpened()) {
-
+							Log.d("Session", "Session is opened");
 							// make request to the /me API
 							Request.newMeRequest(session,
 									new Request.GraphUserCallback() {
@@ -89,13 +91,15 @@ public class MainActivity extends Activity {
 										// callback after Graph API response
 										// with user object
 										@Override
-										public void onCompleted(GraphUser user,
+										public void onCompleted(GraphUser aUser,
 												Response response) {
-											if (user != null) {
+											if (aUser != null) {
 												TextView welcome = (TextView) findViewById(R.id.welcome);
+												user = aUser;
+												((FingerBangerApplication) getApplication()).setUser(user);
 												welcome.setText("Hello "
 														+ user.getName() + "!");
-											Log.d("User","Set welcome text");
+											Log.d("User", "Set welcome text");
 											}
 										}
 									}).executeAsync();

@@ -1,22 +1,38 @@
 package com.latenight.testapp;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import com.facebook.model.*;
+import com.facebook.widget.ProfilePictureView;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.TextView;
 
 public class CurrentWarActivity extends ActionBarActivity {
+
+	private ProfilePictureView profilePictureView;
+	private TextView userName;
+	private GraphUser user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_current_war);
+		setContentView(R.layout.fragment_current_war);
+
+		profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
+		userName = (TextView) findViewById(R.id.name);
+
+		
+		// get user from app
+		if (user != null) {
+			profilePictureView.setProfileId(user.getId());
+			userName.setText(user.getFirstName());
+		}
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
