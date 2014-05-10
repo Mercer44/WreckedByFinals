@@ -12,6 +12,8 @@ tmp/
 *.swp
 *~.nib
 local.properties
+project.properties
+TestApp/libs/android-support-v4.jar
 .classpath
 .settings/
 .loadpath
