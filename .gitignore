@@ -17,6 +17,8 @@ TestApp/libs/android-support-v4.jar
 .classpath
 .settings/
 .loadpath
+*.properties
+gen/
 
 # External tool builders
 .externalToolBuilders/
