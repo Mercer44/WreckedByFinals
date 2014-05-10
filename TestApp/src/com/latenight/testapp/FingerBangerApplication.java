@@ -8,6 +8,7 @@ import com.facebook.model.GraphUser;
 // A real-world application will likely require a more robust data model.
 public class FingerBangerApplication extends Application {
 	private List<GraphUser> selectedUsers;
+	private List<War> wars;
 
 	public List<GraphUser> getSelectedUsers() {
 		return selectedUsers;
@@ -15,5 +16,14 @@ public class FingerBangerApplication extends Application {
 
 	public void setSelectedUsers(List<GraphUser> selectedUsers) {
 		this.selectedUsers = selectedUsers;
+	}
+	
+	public List<War> getWars(){
+		return wars;
+	}
+	
+	public void startWarWith(GraphUser opponent){
+		//TODO check war with opponent is not currently happening
+		wars.add(War.createWarWith(opponent));
 	}
 }
