@@ -19,7 +19,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.widget.Toast;
+
 import com.facebook.FacebookException;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.FriendPickerFragment;
@@ -77,8 +79,8 @@ public class PickFriendsActivity extends FragmentActivity {
             public void onDoneButtonClicked(PickerFragment<?> fragment) {
                 // We just store our selection in the Application for other activities to look at.
                 FingerBangerApplication application = (FingerBangerApplication) getApplication();
+                Log.d("Users","Setting Selected Users");
                 application.setSelectedUsers(friendPickerFragment.getSelection());
-
                 setResult(RESULT_OK, null);
                 finish();
             }
@@ -94,10 +96,12 @@ public class PickFriendsActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        Log.d("ActivityStart","Starting Pick Friends");
         try {
         	FingerBangerApplication application = (FingerBangerApplication) getApplication();
             List<GraphUser> selectedUsers = application.getSelectedUsers();
             if (selectedUsers != null && !selectedUsers.isEmpty()) {
+            	Log.d("ActivityStart","");
                 friendPickerFragment.setSelection(selectedUsers);
             }
             // Load data, unless a query has already taken place.

@@ -11,5 +11,7 @@
     <string name="need_perms_alert_button_ok">OK</string>
     <string name="need_perms_alert_button_quit">Quit</string>
     <string name="welcome">@+id/welcome</string>
+    <string name="title_activity_start_war">StartWarActivity</string>
+    <string name="title_activity_current_war">CurrentWarActivity</string>
 
 </resources>
