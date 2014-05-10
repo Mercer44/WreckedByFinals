@@ -1,11 +1,13 @@
 package com.latenight.testapp;
 
+import com.facebook.AppEventsLogger;
 import com.facebook.model.*;
 import com.facebook.widget.ProfilePictureView;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,17 +24,13 @@ public class CurrentWarActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_current_war);
+		setContentView(R.layout.activity_current_war);
 
 		profilePictureView = (ProfilePictureView) findViewById(R.id.profilePicture);
 		userName = (TextView) findViewById(R.id.name);
 
-		
-		// get user from app
-		if (user != null) {
-			profilePictureView.setProfileId(user.getId());
-			userName.setText(user.getFirstName());
-		}
+		user = ((FingerBangerApplication) this.getApplication()).getUser();
+		Log.d("User", "Got User: " + user.getName());
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -46,6 +44,38 @@ public class CurrentWarActivity extends ActionBarActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.current_war, menu);
 		return true;
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Call the 'activateApp' method to log an app event for use in
+		// analytics and advertising reporting. Do so in
+		// the onResume methods of the primary Activities that an app may be
+		// launched into.
+		AppEventsLogger.activateApp(this);
+
+		updateUI();
+	}
+
+	private void updateUI() {
+		if (user != null) {
+
+			String id = user.getId();
+
+			if (id != null) {
+				Log.d("User", "Setting ProfileView:" + id);
+
+				// profilePictureView.setProfileId(id);
+			}
+			String fName = user.getFirstName();
+			if (fName != null) {
+				Log.d("User", "Setting Username:" + fName);
+				// userName.setText(fName);
+			}
+			Log.d("User", "Successsssssss!!!!!");
+		}
 	}
 
 	@Override

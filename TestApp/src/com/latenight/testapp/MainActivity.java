@@ -44,10 +44,51 @@ public class MainActivity extends Activity {
 						public void call(Session session, SessionState state,
 								Exception exception) {
 							Log.d("Session","Setting SessionStateChanged");
+							Request.newMeRequest(Session.getActiveSession(),
+									new Request.GraphUserCallback() {
+
+										// callback after Graph API response
+										// with user object
+										@Override
+										public void onCompleted(GraphUser aUser,
+												Response response) {
+											if (aUser != null) {
+												TextView welcome = (TextView) findViewById(R.id.welcome);
+												user = aUser;
+												((FingerBangerApplication) getApplication()).setUser(user);
+												welcome.setText("Hello "
+														+ user.getName() + "!");
+											Log.d("User", "Set welcome text");
+											}
+										}
+									}).executeAsync();
+
 							onSessionStateChanged(session, state, exception);
 						}
 					});
 			return false;
+		}
+		if (Session.getActiveSession().isOpened()) {
+			Log.d("Session", "Session is opened");
+			// make request to the /me API
+			Request.newMeRequest(Session.getActiveSession(),
+					new Request.GraphUserCallback() {
+
+						// callback after Graph API response
+						// with user object
+						@Override
+						public void onCompleted(GraphUser aUser,
+								Response response) {
+							if (aUser != null) {
+								TextView welcome = (TextView) findViewById(R.id.welcome);
+								user = aUser;
+								((FingerBangerApplication) getApplication()).setUser(user);
+								welcome.setText("Hello "
+										+ user.getName() + "!");
+							Log.d("User", "Set welcome text");
+							}
+						}
+					}).executeAsync();
 		}
 		return true;
 	}
