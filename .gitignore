@@ -215,3 +215,27 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+TestApp/gen/android/support/v7/appcompat/R.java
+
+TestApp/gen/com/latenight/testapp/R.java
+
+TestApp/gen/com/facebook/android/R.java
+
+TestApp/gen/android/support/v7/appcompat/R.java
+
+TestApp/gen/com/facebook/android/R.java
+
+TestApp/gen/com/latenight/testapp/R.java
+
+TestApp/gen/android/support/v7/appcompat/R.java
+
+TestApp/gen/com/facebook/android/R.java
+
+TestApp/gen/com/latenight/testapp/R.java
+
+TestApp/gen/android/support/v7/appcompat/R.java
+
+TestApp/gen/com/facebook/android/R.java
+
+TestApp/gen/com/latenight/testapp/R.java
